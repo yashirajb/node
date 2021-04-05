@@ -32,5 +32,4 @@ readFile('./content/first.txt', 'utf8', (err, result) =>{
 
 console.log('starting the next task')
 //btw this is callback hell
-
 //using promises and aysnc/await will help with this 

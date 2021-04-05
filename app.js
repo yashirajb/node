@@ -1,32 +1,16 @@
-// FS file module---asynchronous(non-blocking) or synchronous(blocking) methods
 
-//asynchronous
-const {readFile, writeFile} = require('fs');
+//local dependency - use it only in this particular project
+// global dependenct - use it in any project...npx
+//sudo npm install -g <packageName> (mac)
 
-readFile('./content/first.txt', 'utf8', (err, result) =>{
-    if(err){
-        console.log(err)
-        return
-    }
-    console.log(result)
+//package.json - manifest file
 
-    const first = result;
-    readFile('./content/second.txt', 'utf8', (err, result) =>{
-        if(err){
-            console.log(err)
-            return
-        }
-        console.log(result)
+const _ = require('lodash');
+const items = [1, [2, [3, [4]]]];
 
-        const second = result;
-        writeFile('./content/result-async.txt', `Here is the result: ${first}, ${second}`, (err, result) =>{
-            if(err){
-                console.log(err);
-                return
-            }
-            console.log(result)
-        }
-     )
+//lodash has a built in method (flattenDeep) that will flatten the array
 
-    })
-})
+const newItems = _.flattenDeep(items)
+console.log(newItems)
+//[ 1, 2, 3, 4 ]
+
