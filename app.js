@@ -43,10 +43,10 @@
 //     console.log('Server listening on port 5000')
 // })
 
-const { readFile, writeFile} = require('fs');
-const util = require('util')
-const readFilePromise = util.promisify(readFile)
-const writeFilePromise = util.promisify(writeFile)
+// const { readFile, writeFile} = require('fs');
+// const util = require('util')
+// const readFilePromise = util.promisify(readFile)
+// const writeFilePromise = util.promisify(writeFile)
 
 
 
@@ -77,15 +77,27 @@ const writeFilePromise = util.promisify(writeFile)
 
     //Async-Await
 
-const start = async() => {
-    try {
-    const first = await readFilePromise('./content/first.txt', 'utf8');
-    const second = await readFilePromise('./content/second.txt', 'utf8');
-    await writeFilePromise('./content/result-mnid-grenade.txt', `This is awesome : ${first} ${second}`)
-    console.log(first, second)
-} catch (error) {
-    console.log(error)
-    }
-}
+// const start = async() => {
+//     try {
+//     const first = await readFilePromise('./content/first.txt', 'utf8');
+//     const second = await readFilePromise('./content/second.txt', 'utf8');
+//     await writeFilePromise('./content/result-mnid-grenade.txt', `This is awesome : ${first} ${second}`)
+//     console.log(first, second)
+// } catch (error) {
+//     console.log(error)
+//     }
+// }
+// start()
 
-start()
+
+const http = require('http');
+const fs = require('fs');
+
+http
+ .createServer(function (req, res) {
+     const text = fs.readFileSync('./content/big.txt', 'utf8')
+     res.end(text)
+ })
+ .listen(5000, () => {
+     console.log('listening on port 5000')
+ })
